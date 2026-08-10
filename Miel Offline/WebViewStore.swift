@@ -22,6 +22,8 @@ class WebViewStore: NSObject, ObservableObject {
     @Published var canGoForward: Bool = false
     @Published var isLoading: Bool = false
     @Published var descargaEnCurso: String? = nil
+    
+    var ultimaMateriaSolicitada: String? = nil
 
     struct DuplicadoInfo {
         let url: URL
@@ -30,15 +32,6 @@ class WebViewStore: NSObject, ObservableObject {
     }
     @Published var archivoDuplicado: DuplicadoInfo? = nil
     @Published var quickLookURLParaAbrir: URL? = nil
-
-    // MARK: Computed properties
-    var materiaActual: String {
-        let title = webView.title ?? ""
-        if let range = title.range(of: " (CONTENIDOS)") {
-            return String(title[..<range.lowerBound]).trimmingCharacters(in: .whitespacesAndNewlines)
-        }
-        return "General"
-    }
 
     // MARK: WebView
     let webView: WKWebView
@@ -69,20 +62,39 @@ class WebViewStore: NSObject, ObservableObject {
         // Inyecta un script que busca etiquetas <video> y agrega un botón de "Descargar Offline"
         let js = """
         function addMielDownloadButtons() {
+            let materia = "General";
+            let title = document.title;
+            if (title && title.includes('(')) {
+                materia = title.split('(')[0].trim();
+            } else {
+                let h1 = document.querySelector('h1.w3-hide-small') || document.querySelector('h1');
+                if (h1 && h1.innerText && h1.innerText.trim().length > 2) {
+                    materia = h1.innerText.trim();
+                }
+            }
+
+            document.querySelectorAll('a.btnDescargar').forEach(a => {
+                if (!a.classList.contains('popup-mp4')) {
+                    if (a.href && !a.href.includes('miel_materia')) {
+                        let sep = a.href.includes('?') ? '&' : '?';
+                        a.href = a.href + sep + 'miel_materia=' + encodeURIComponent(materia);
+                    }
+                }
+            });
+
             let videos = document.querySelectorAll('video');
             videos.forEach(v => {
                 if (!v.hasAttribute('data-miel-download-added')) {
                     v.setAttribute('data-miel-download-added', 'true');
                     let url = v.src || (v.querySelector('source') ? v.querySelector('source').src : null);
                     if (url && !url.includes('youtube') && !url.includes('vimeo') && !url.startsWith('blob:')) {
-                        let title = document.title.replace(/[^a-zA-Z0-9 ]/g, '').trim();
+                        let vTitle = document.title.replace(/[^a-zA-Z0-9 ]/g, '').trim();
                         let h = document.querySelector('h1, h2, h3, h4');
                         if (h && h.innerText) {
                              let cleanH = h.innerText.replace(/[^a-zA-Z0-9 ]/g, '').trim();
-                             if (cleanH.length > 3) title = cleanH;
+                             if (cleanH.length > 3) vTitle = cleanH;
                         }
                         
-                        // Extraer el nombre de la fila <tr> si existe en la página de Contenidos
                         let aTag = document.querySelector(`a[data-link="${url}"]`);
                         if (aTag) {
                             let tr = aTag.closest('tr');
@@ -91,22 +103,22 @@ class WebViewStore: NSObject, ObservableObject {
                                 if (titleTd) {
                                     let cleanRowTitle = titleTd.innerText.replace(/\\n/g, '').trim();
                                     if (cleanRowTitle.length > 0) {
-                                        title = cleanRowTitle;
+                                        vTitle = cleanRowTitle;
                                     }
                                 }
                             }
                         }
 
-                        if (!title || title.toLowerCase().includes('miel') || title.toLowerCase() === 'contenidos') {
-                             title = 'Video_Clase';
+                        if (!vTitle || vTitle.toLowerCase().includes('miel') || vTitle.toLowerCase() === 'contenidos') {
+                             vTitle = 'Video_Clase';
                         }
                         
                         let separator = url.includes('?') ? '&' : '?';
-                        let finalUrl = url + separator + 'miel_title=' + encodeURIComponent(title);
+                        let finalUrl = url + separator + 'miel_title=' + encodeURIComponent(vTitle) + '&miel_materia=' + encodeURIComponent(materia);
                         
                         let a = document.createElement('a');
                         a.href = finalUrl;
-                        a.download = title + '.mp4';
+                        a.download = vTitle + '.mp4';
                         document.body.appendChild(a);
                         a.click();
                         document.body.removeChild(a);
@@ -263,6 +275,12 @@ extension WebViewStore: WKNavigationDelegate {
         decidePolicyFor navigationAction: WKNavigationAction,
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
+        if let url = navigationAction.request.url,
+           let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+           let materia = components.queryItems?.first(where: { $0.name == "miel_materia" })?.value {
+            self.ultimaMateriaSolicitada = materia
+        }
+
         if navigationAction.shouldPerformDownload {
             decisionHandler(.download)
             return
@@ -330,17 +348,22 @@ extension WebViewStore: WKDownloadDelegate {
             return
         }
         
-        let materia = self.materiaActual
-        let carpeta = docs.appendingPathComponent("ArchivosOffline").appendingPathComponent(materia)
-        try? fm.createDirectory(at: carpeta, withIntermediateDirectories: true, attributes: nil)
-        
+        var materia = self.ultimaMateriaSolicitada ?? "General"
         var finalName = suggestedFilename
         if let responseURL = response.url,
-           let components = URLComponents(url: responseURL, resolvingAgainstBaseURL: false),
-           let queryTitle = components.queryItems?.first(where: { $0.name == "miel_title" })?.value {
-            finalName = queryTitle + ".mp4"
+           let components = URLComponents(url: responseURL, resolvingAgainstBaseURL: false) {
+            
+            if let queryTitle = components.queryItems?.first(where: { $0.name == "miel_title" })?.value {
+                finalName = queryTitle + ".mp4"
+            }
+            if let queryMateria = components.queryItems?.first(where: { $0.name == "miel_materia" })?.value {
+                materia = queryMateria
+            }
         }
         if finalName.isEmpty { finalName = "archivo_descargado" }
+        
+        let carpeta = docs.appendingPathComponent("ArchivosOffline").appendingPathComponent(materia)
+        try? fm.createDirectory(at: carpeta, withIntermediateDirectories: true, attributes: nil)
         
         let destino = carpeta.appendingPathComponent(finalName)
         
