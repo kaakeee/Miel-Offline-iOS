@@ -21,19 +21,27 @@ struct ArchivoLocal: Identifiable, Codable {
     var extension_: String           // File extension (lowercase)
     var fechaDescarga: Date
     var tamano: Int64                // Bytes
+    var materia: String?             // Optional for legacy compatibility
 
     enum CodingKeys: String, CodingKey {
-        case id, nombre, nombreOriginal, extension_, fechaDescarga, tamano
+        case id, nombre, nombreOriginal, extension_, fechaDescarga, tamano, materia
+    }
+
+    var materiaSegura: String {
+        return materia ?? "General"
     }
 
     // MARK: Computed URL
 
     var url: URL? {
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let fileURL = docs
-            .appendingPathComponent("ArchivosOffline")
-            .appendingPathComponent(nombre)
-        return FileManager.default.fileExists(atPath: fileURL.path) ? fileURL : nil
+        let base = docs.appendingPathComponent("ArchivosOffline")
+        
+        let fileURL = base.appendingPathComponent(materiaSegura).appendingPathComponent(nombre)
+        if FileManager.default.fileExists(atPath: fileURL.path) { return fileURL }
+        
+        let legacyURL = base.appendingPathComponent(nombre)
+        return FileManager.default.fileExists(atPath: legacyURL.path) ? legacyURL : nil
     }
 
     // MARK: Display helpers
@@ -138,31 +146,45 @@ class GestionArchivos: ObservableObject {
     /// Syncs in-memory metadata with actual files on disk (handles files added externally or metadata mismatches).
     func sincronizarConDisco() {
         let fm = FileManager.default
-        let keys: [URLResourceKey] = [.fileSizeKey, .creationDateKey]
-        guard let urls = try? fm.contentsOfDirectory(
+        let keys: [URLResourceKey] = [.fileSizeKey, .creationDateKey, .isDirectoryKey]
+        
+        guard let enumerator = fm.enumerator(
             at: carpetaArchivos,
             includingPropertiesForKeys: keys,
-            options: .skipsHiddenFiles
+            options: [.skipsHiddenFiles]
         ) else { return }
-
-        let nombresEnDisco    = Set(urls.map { $0.lastPathComponent })
+        
+        var urlsEnDisco: [URL] = []
+        for case let fileURL as URL in enumerator {
+            let res = try? fileURL.resourceValues(forKeys: Set(keys))
+            if res?.isDirectory == false {
+                urlsEnDisco.append(fileURL)
+            }
+        }
+        
+        let nombresEnDisco    = Set(urlsEnDisco.map { $0.lastPathComponent })
         let nombresEnMetadata = Set(archivos.map { $0.nombre })
 
         // Remove metadata for files no longer on disk
         archivos.removeAll { !nombresEnDisco.contains($0.nombre) }
 
         // Add metadata for files on disk that have no metadata entry
-        for url in urls {
+        for url in urlsEnDisco {
             let nombre = url.lastPathComponent
             let ext    = url.pathExtension.lowercased()
             guard tiposPermitidos.contains(ext), !nombresEnMetadata.contains(nombre) else { continue }
+            
+            let parentDir = url.deletingLastPathComponent()
+            let materia = (parentDir.lastPathComponent == "ArchivosOffline") ? "General" : parentDir.lastPathComponent
+            
             let res    = try? url.resourceValues(forKeys: Set(keys))
             let archivo = ArchivoLocal(
                 nombre:          nombre,
                 nombreOriginal:  nombre,
                 extension_:      ext,
                 fechaDescarga:   res?.creationDate ?? Date(),
-                tamano:          Int64(res?.fileSize ?? 0)
+                tamano:          Int64(res?.fileSize ?? 0),
+                materia:         materia
             )
             archivos.append(archivo)
         }
@@ -195,6 +217,15 @@ class GestionArchivos: ObservableObject {
         return tipos.compactMap { tipo in
             let lista = archivos.filter { $0.tipoLegible == tipo }
             return lista.isEmpty ? nil : (tipo: tipo, archivos: lista)
+        }
+    }
+
+    /// Files grouped by Materia, alphabetically.
+    var archivosPorMateria: [(materia: String, archivos: [ArchivoLocal])] {
+        let materias = Array(Set(archivos.map { $0.materiaSegura })).sorted()
+        return materias.compactMap { mat in
+            let lista = archivos.filter { $0.materiaSegura == mat }.sorted { $0.nombre < $1.nombre }
+            return lista.isEmpty ? nil : (materia: mat, archivos: lista)
         }
     }
 }

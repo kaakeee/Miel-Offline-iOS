@@ -89,9 +89,9 @@ struct ArchivosOfflineView: View {
 
     var listaArchivos: some View {
         List {
-            // Files grouped by type
-            ForEach(gestorArchivos.archivosPorTipo, id: \.tipo) { grupo in
-                Section(grupo.tipo) {
+            // Files grouped by Materia
+            ForEach(gestorArchivos.archivosPorMateria, id: \.materia) { grupo in
+                Section(grupo.materia) {
                     ForEach(grupo.archivos) { archivo in
                         ArchivoFilaView(archivo: archivo) {
                             abrirArchivo(archivo)

@@ -26,9 +26,19 @@ class WebViewStore: NSObject, ObservableObject {
     struct DuplicadoInfo {
         let url: URL
         let nombre: String
+        let materia: String
     }
     @Published var archivoDuplicado: DuplicadoInfo? = nil
     @Published var quickLookURLParaAbrir: URL? = nil
+
+    // MARK: Computed properties
+    var materiaActual: String {
+        let title = webView.title ?? ""
+        if let range = title.range(of: " (CONTENIDOS)") {
+            return String(title[..<range.lowerBound]).trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        return "General"
+    }
 
     // MARK: WebView
     let webView: WKWebView
@@ -105,6 +115,56 @@ class WebViewStore: NSObject, ObservableObject {
             });
         }
         setInterval(addMielDownloadButtons, 1500);
+
+        function addBatchDownloadButtons() {
+            let units = document.querySelectorAll('.w3-accordion-content.w3-show');
+            units.forEach(unit => {
+                if (!unit.hasAttribute('data-batch-added')) {
+                    unit.setAttribute('data-batch-added', 'true');
+                    
+                    let btn = document.createElement('button');
+                    btn.innerHTML = '⬇️ Descargar Todos los Archivos de esta Unidad';
+                    btn.style = 'width:90%; padding:12px; background:#4CAF50; color:white; font-weight:bold; border-radius:8px; border:none; margin: 10px 5%; font-size:16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);';
+                    btn.onclick = function() {
+                        let items = [];
+                        unit.querySelectorAll('a.btnDescargar').forEach(a => {
+                            if (!a.classList.contains('popup-mp4')) {
+                                let titleTd = a.closest('tr')?.querySelectorAll('td')[1];
+                                let title = titleTd ? titleTd.innerText.replace(/\\n/g, '').trim() : 'Apunte';
+                                items.push({url: a.href, title: title});
+                            }
+                        });
+                        unit.querySelectorAll('a.popup-mp4').forEach(a => {
+                            let url = a.getAttribute('data-link');
+                            if (url) {
+                                let titleTd = a.closest('tr')?.querySelectorAll('td')[1];
+                                let title = titleTd ? titleTd.innerText.replace(/\\n/g, '').trim() : 'Video';
+                                items.push({url: url, title: title});
+                            }
+                        });
+                        
+                        if (items.length === 0) { alert('No hay archivos para descargar en esta unidad.'); return; }
+                        alert('Iniciando descarga de ' + items.length + ' archivos en segundo plano...');
+                        
+                        function dlNext(idx) {
+                            if (idx >= items.length) return;
+                            let file = items[idx];
+                            let sep = file.url.includes('?') ? '&' : '?';
+                            let a = document.createElement('a');
+                            a.href = file.url + sep + 'miel_title=' + encodeURIComponent(file.title);
+                            a.download = file.title;
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                            setTimeout(() => dlNext(idx + 1), 800);
+                        }
+                        dlNext(0);
+                    };
+                    unit.insertBefore(btn, unit.firstChild);
+                }
+            });
+        }
+        setInterval(addBatchDownloadButtons, 1500);
         """
         let script = WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
         config.userContentController.addUserScript(script)
@@ -149,7 +209,10 @@ class WebViewStore: NSObject, ObservableObject {
 
     func forzarDescarga(_ dup: DuplicadoInfo) {
         let fm = FileManager.default
-        let destino = fm.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("ArchivosOffline/\(dup.nombre)")
+        let destino = fm.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("ArchivosOffline")
+            .appendingPathComponent(dup.materia)
+            .appendingPathComponent(dup.nombre)
         try? fm.removeItem(at: destino)
         
         let js = "let a = document.createElement('a'); a.href = '\(dup.url.absoluteString)'; a.download = '\(dup.nombre)'; document.body.appendChild(a); a.click(); document.body.removeChild(a);"
@@ -160,7 +223,10 @@ class WebViewStore: NSObject, ObservableObject {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: titulo, message: mensaje, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Abrir archivo", style: .default, handler: { _ in
-                let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("ArchivosOffline/\(dup.nombre)")
+                let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                    .appendingPathComponent("ArchivosOffline")
+                    .appendingPathComponent(dup.materia)
+                    .appendingPathComponent(dup.nombre)
                 self.quickLookURLParaAbrir = url
             }))
             alert.addAction(UIAlertAction(title: "Reescribir", style: .destructive, handler: { _ in
@@ -314,7 +380,8 @@ extension WebViewStore: WKDownloadDelegate {
             return
         }
         
-        let carpeta = docs.appendingPathComponent("ArchivosOffline")
+        let materia = self.materiaActual
+        let carpeta = docs.appendingPathComponent("ArchivosOffline").appendingPathComponent(materia)
         try? fm.createDirectory(at: carpeta, withIntermediateDirectories: true, attributes: nil)
         
         var finalName = suggestedFilename
@@ -337,7 +404,7 @@ extension WebViewStore: WKDownloadDelegate {
                 if autoOpen {
                     self.quickLookURLParaAbrir = destino
                 } else {
-                    let dupInfo = DuplicadoInfo(url: response.url ?? URL(string: "about:blank")!, nombre: finalName)
+                    let dupInfo = DuplicadoInfo(url: response.url ?? URL(string: "about:blank")!, nombre: finalName, materia: materia)
                     self.archivoDuplicado = dupInfo
                     self.mostrarAlertaGlobal(
                         titulo: "Archivo Duplicado",
