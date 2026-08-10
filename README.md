@@ -2,6 +2,12 @@
 
 **Miel Offline** es una aplicación nativa para iOS diseñada específicamente para los estudiantes de la **Universidad Nacional de La Matanza (UNLaM)**. Su propósito es facilitar el acceso y la descarga de materiales de estudio desde la plataforma MIEL (Materias Interactivas En Línea), permitiendo visualizar videos, clases, PDFs y apuntes sin necesidad de una conexión constante a internet.
 
+## 🎥 Demo en Acción
+
+<p align="center">
+  <video src="https://github.com/kaakeee/Miel-Offline-iOS/raw/main/assets/demo.mp4" width="250" controls></video>
+</p>
+
 ## ✨ Características Principales
 
 - **Navegación Integrada**: Explora el campus virtual de MIEL directamente desde la app de manera segura, manteniendo tu sesión iniciada siempre.
