@@ -63,13 +63,23 @@ class WebViewStore: NSObject, ObservableObject {
         let js = """
         function addMielDownloadButtons() {
             let materia = "General";
-            let title = document.title;
-            if (title && title.includes('(')) {
-                materia = title.split('(')[0].trim();
+            let btnDropdown = document.getElementById('botonDropdownCurso');
+            if (btnDropdown && btnDropdown.getAttribute('aria-label')) {
+                let aria = btnDropdown.getAttribute('aria-label');
+                if (aria.includes('(')) {
+                    materia = aria.split('(')[0].trim();
+                } else {
+                    materia = aria.trim();
+                }
             } else {
-                let h1 = document.querySelector('h1.w3-hide-small') || document.querySelector('h1');
-                if (h1 && h1.innerText && h1.innerText.trim().length > 2) {
-                    materia = h1.innerText.trim();
+                let title = document.title;
+                if (title && title.includes('(')) {
+                    materia = title.split('(')[0].trim();
+                } else {
+                    let h1 = document.querySelector('h1.w3-hide-small') || document.querySelector('h1');
+                    if (h1 && h1.innerText && h1.innerText.trim().length > 2) {
+                        materia = h1.innerText.trim();
+                    }
                 }
             }
 
