@@ -1,0 +1,565 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		39B1A45B2E6FA2F6000CE652 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 39B1A4452E6FA2F5000CE652 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 39B1A44C2E6FA2F5000CE652;
+			remoteInfo = "Miel Offline";
+		};
+		39B1A4652E6FA2F6000CE652 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 39B1A4452E6FA2F5000CE652 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 39B1A44C2E6FA2F5000CE652;
+			remoteInfo = "Miel Offline";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		39B1A44D2E6FA2F5000CE652 /* Miel Offline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Miel Offline.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		39B1A45A2E6FA2F6000CE652 /* Miel OfflineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Miel OfflineTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		39B1A4642E6FA2F6000CE652 /* Miel OfflineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Miel OfflineUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		39B1A44F2E6FA2F5000CE652 /* Miel Offline */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Miel Offline";
+			sourceTree = "<group>";
+		};
+		39B1A45D2E6FA2F6000CE652 /* Miel OfflineTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Miel OfflineTests";
+			sourceTree = "<group>";
+		};
+		39B1A4672E6FA2F6000CE652 /* Miel OfflineUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Miel OfflineUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		39B1A44A2E6FA2F5000CE652 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39B1A4572E6FA2F6000CE652 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39B1A4612E6FA2F6000CE652 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		39B1A4442E6FA2F5000CE652 = {
+			isa = PBXGroup;
+			children = (
+				39B1A44F2E6FA2F5000CE652 /* Miel Offline */,
+				39B1A45D2E6FA2F6000CE652 /* Miel OfflineTests */,
+				39B1A4672E6FA2F6000CE652 /* Miel OfflineUITests */,
+				39B1A44E2E6FA2F5000CE652 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		39B1A44E2E6FA2F5000CE652 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				39B1A44D2E6FA2F5000CE652 /* Miel Offline.app */,
+				39B1A45A2E6FA2F6000CE652 /* Miel OfflineTests.xctest */,
+				39B1A4642E6FA2F6000CE652 /* Miel OfflineUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		39B1A44C2E6FA2F5000CE652 /* Miel Offline */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 39B1A46E2E6FA2F6000CE652 /* Build configuration list for PBXNativeTarget "Miel Offline" */;
+			buildPhases = (
+				39B1A4492E6FA2F5000CE652 /* Sources */,
+				39B1A44A2E6FA2F5000CE652 /* Frameworks */,
+				39B1A44B2E6FA2F5000CE652 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				39B1A44F2E6FA2F5000CE652 /* Miel Offline */,
+			);
+			name = "Miel Offline";
+			packageProductDependencies = (
+			);
+			productName = "Miel Offline";
+			productReference = 39B1A44D2E6FA2F5000CE652 /* Miel Offline.app */;
+			productType = "com.apple.product-type.application";
+		};
+		39B1A4592E6FA2F6000CE652 /* Miel OfflineTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 39B1A4712E6FA2F6000CE652 /* Build configuration list for PBXNativeTarget "Miel OfflineTests" */;
+			buildPhases = (
+				39B1A4562E6FA2F6000CE652 /* Sources */,
+				39B1A4572E6FA2F6000CE652 /* Frameworks */,
+				39B1A4582E6FA2F6000CE652 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				39B1A45C2E6FA2F6000CE652 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				39B1A45D2E6FA2F6000CE652 /* Miel OfflineTests */,
+			);
+			name = "Miel OfflineTests";
+			packageProductDependencies = (
+			);
+			productName = "Miel OfflineTests";
+			productReference = 39B1A45A2E6FA2F6000CE652 /* Miel OfflineTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		39B1A4632E6FA2F6000CE652 /* Miel OfflineUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 39B1A4742E6FA2F6000CE652 /* Build configuration list for PBXNativeTarget "Miel OfflineUITests" */;
+			buildPhases = (
+				39B1A4602E6FA2F6000CE652 /* Sources */,
+				39B1A4612E6FA2F6000CE652 /* Frameworks */,
+				39B1A4622E6FA2F6000CE652 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				39B1A4662E6FA2F6000CE652 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				39B1A4672E6FA2F6000CE652 /* Miel OfflineUITests */,
+			);
+			name = "Miel OfflineUITests";
+			packageProductDependencies = (
+			);
+			productName = "Miel OfflineUITests";
+			productReference = 39B1A4642E6FA2F6000CE652 /* Miel OfflineUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		39B1A4452E6FA2F5000CE652 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 2610;
+				TargetAttributes = {
+					39B1A44C2E6FA2F5000CE652 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					39B1A4592E6FA2F6000CE652 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 39B1A44C2E6FA2F5000CE652;
+					};
+					39B1A4632E6FA2F6000CE652 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 39B1A44C2E6FA2F5000CE652;
+					};
+				};
+			};
+			buildConfigurationList = 39B1A4482E6FA2F5000CE652 /* Build configuration list for PBXProject "Miel Offline" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 39B1A4442E6FA2F5000CE652;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 39B1A44E2E6FA2F5000CE652 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				39B1A44C2E6FA2F5000CE652 /* Miel Offline */,
+				39B1A4592E6FA2F6000CE652 /* Miel OfflineTests */,
+				39B1A4632E6FA2F6000CE652 /* Miel OfflineUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		39B1A44B2E6FA2F5000CE652 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39B1A4582E6FA2F6000CE652 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39B1A4622E6FA2F6000CE652 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		39B1A4492E6FA2F5000CE652 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39B1A4562E6FA2F6000CE652 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		39B1A4602E6FA2F6000CE652 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		39B1A45C2E6FA2F6000CE652 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 39B1A44C2E6FA2F5000CE652 /* Miel Offline */;
+			targetProxy = 39B1A45B2E6FA2F6000CE652 /* PBXContainerItemProxy */;
+		};
+		39B1A4662E6FA2F6000CE652 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 39B1A44C2E6FA2F5000CE652 /* Miel Offline */;
+			targetProxy = 39B1A4652E6FA2F6000CE652 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		39B1A46C2E6FA2F6000CE652 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = TKCDUP852P;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		39B1A46D2E6FA2F6000CE652 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = TKCDUP852P;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		39B1A46F2E6FA2F6000CE652 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TKCDUP852P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "RamiroSanabria.Miel-Offline";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		39B1A4702E6FA2F6000CE652 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TKCDUP852P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "RamiroSanabria.Miel-Offline";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		39B1A4722E6FA2F6000CE652 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TKCDUP852P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "RamiroSanabria.Miel-OfflineTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Miel Offline.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Miel Offline";
+			};
+			name = Debug;
+		};
+		39B1A4732E6FA2F6000CE652 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TKCDUP852P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "RamiroSanabria.Miel-OfflineTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Miel Offline.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Miel Offline";
+			};
+			name = Release;
+		};
+		39B1A4752E6FA2F6000CE652 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TKCDUP852P;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "RamiroSanabria.Miel-OfflineUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Miel Offline";
+			};
+			name = Debug;
+		};
+		39B1A4762E6FA2F6000CE652 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TKCDUP852P;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "RamiroSanabria.Miel-OfflineUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Miel Offline";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		39B1A4482E6FA2F5000CE652 /* Build configuration list for PBXProject "Miel Offline" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39B1A46C2E6FA2F6000CE652 /* Debug */,
+				39B1A46D2E6FA2F6000CE652 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		39B1A46E2E6FA2F6000CE652 /* Build configuration list for PBXNativeTarget "Miel Offline" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39B1A46F2E6FA2F6000CE652 /* Debug */,
+				39B1A4702E6FA2F6000CE652 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		39B1A4712E6FA2F6000CE652 /* Build configuration list for PBXNativeTarget "Miel OfflineTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39B1A4722E6FA2F6000CE652 /* Debug */,
+				39B1A4732E6FA2F6000CE652 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		39B1A4742E6FA2F6000CE652 /* Build configuration list for PBXNativeTarget "Miel OfflineUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39B1A4752E6FA2F6000CE652 /* Debug */,
+				39B1A4762E6FA2F6000CE652 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 39B1A4452E6FA2F5000CE652 /* Project object */;
+}
