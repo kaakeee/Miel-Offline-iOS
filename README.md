@@ -6,6 +6,7 @@
 
 - **Navegación Integrada**: Explora el campus virtual de MIEL directamente desde la app de manera segura, manteniendo tu sesión iniciada siempre.
 - **Auto-descarga Inteligente**: La app detecta automáticamente cuando reproduces un video de una clase o abres un PDF y lo descarga en segundo plano.
+- **Carpetas por Materia**: Todos tus apuntes y videos descargados se organizan automáticamente en carpetas separadas según la materia a la que pertenecen, de forma 100% inteligente y transparente.
 - **Nombres Contextuales**: Olvídate de los archivos con nombres genéricos. El sistema extrae el título exacto de la clase desde la plataforma web para nombrar tus descargas.
 - **Control de Duplicados**: Si intentas descargar una clase o apunte que ya tienes guardado, la app bloquea la descarga para ahorrar tus datos móviles y te permite abrir la copia local instantáneamente.
 - **Integración con iOS**: Todos los archivos se guardan en el "Sandbox" de la app. Además, puedes acceder a ellos desde la app nativa de **Archivos (Files)** de tu iPhone bajo la carpeta `En mi iPhone > Miel Offline`.
@@ -35,7 +36,6 @@
 4. Presiona el botón de **Play** (▶️) o usa el atajo `Cmd + R` para compilar y ejecutar.
 
 ## 💡 Ideas a futuro (Roadmap)
-- Modo "Descarga en lote" (Descargar todos los apuntes de una materia a la vez).
 - Recordatorios de parciales leídos desde el calendario del campus.
 - Sincronización en iCloud para tener los archivos en el iPad.
 
