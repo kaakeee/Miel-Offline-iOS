@@ -148,49 +148,70 @@ class GestionArchivos: ObservableObject {
         let fm = FileManager.default
         let keys: [URLResourceKey] = [.fileSizeKey, .creationDateKey, .isDirectoryKey]
         
-        guard let enumerator = fm.enumerator(
-            at: carpetaArchivos,
-            includingPropertiesForKeys: keys,
-            options: [.skipsHiddenFiles]
-        ) else { return }
-        
-        var urlsEnDisco: [URL] = []
-        for case let fileURL as URL in enumerator {
-            let res = try? fileURL.resourceValues(forKeys: Set(keys))
-            if res?.isDirectory == false {
-                urlsEnDisco.append(fileURL)
+        let carpeta = carpetaArchivos
+        let metaURL = metadataURL
+        let archivosActuales = self.archivos
+        let permitidos = self.tiposPermitidos
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let enumerator = fm.enumerator(
+                at: carpeta,
+                includingPropertiesForKeys: keys,
+                options: [.skipsHiddenFiles]
+            ) else { return }
+            
+            var urlsEnDisco: [URL] = []
+            for case let fileURL as URL in enumerator {
+                let res = try? fileURL.resourceValues(forKeys: Set(keys))
+                if res?.isDirectory == false {
+                    urlsEnDisco.append(fileURL)
+                }
+            }
+            
+            let nombresEnDisco    = Set(urlsEnDisco.map { $0.lastPathComponent })
+            let nombresEnMetadata = Set(archivosActuales.map { $0.nombre })
+            
+            var nuevosArchivos = archivosActuales
+            
+            // Remove metadata for files no longer on disk
+            nuevosArchivos.removeAll { !nombresEnDisco.contains($0.nombre) }
+            
+            // Add metadata for files on disk that have no metadata entry
+            for url in urlsEnDisco {
+                let nombre = url.lastPathComponent
+                let ext    = url.pathExtension.lowercased()
+                guard permitidos.contains(ext), !nombresEnMetadata.contains(nombre) else { continue }
+                
+                let parentDir = url.deletingLastPathComponent()
+                let materia = (parentDir.lastPathComponent == "ArchivosOffline") ? "General" : parentDir.lastPathComponent
+                
+                let res    = try? url.resourceValues(forKeys: Set(keys))
+                let archivo = ArchivoLocal(
+                    nombre:          nombre,
+                    nombreOriginal:  nombre,
+                    extension_:      ext,
+                    fechaDescarga:   res?.creationDate ?? Date(),
+                    tamano:          Int64(res?.fileSize ?? 0),
+                    materia:         materia
+                )
+                nuevosArchivos.append(archivo)
+            }
+            
+            nuevosArchivos.sort { $0.fechaDescarga > $1.fechaDescarga }
+            
+            // Encode JSON in background
+            let dataToSave = try? JSONEncoder().encode(nuevosArchivos)
+            
+            DispatchQueue.main.async {
+                self.archivos = nuevosArchivos
+                // Save JSON in background
+                DispatchQueue.global(qos: .background).async {
+                    if let d = dataToSave {
+                        try? d.write(to: metaURL)
+                    }
+                }
             }
         }
-        
-        let nombresEnDisco    = Set(urlsEnDisco.map { $0.lastPathComponent })
-        let nombresEnMetadata = Set(archivos.map { $0.nombre })
-
-        // Remove metadata for files no longer on disk
-        archivos.removeAll { !nombresEnDisco.contains($0.nombre) }
-
-        // Add metadata for files on disk that have no metadata entry
-        for url in urlsEnDisco {
-            let nombre = url.lastPathComponent
-            let ext    = url.pathExtension.lowercased()
-            guard tiposPermitidos.contains(ext), !nombresEnMetadata.contains(nombre) else { continue }
-            
-            let parentDir = url.deletingLastPathComponent()
-            let materia = (parentDir.lastPathComponent == "ArchivosOffline") ? "General" : parentDir.lastPathComponent
-            
-            let res    = try? url.resourceValues(forKeys: Set(keys))
-            let archivo = ArchivoLocal(
-                nombre:          nombre,
-                nombreOriginal:  nombre,
-                extension_:      ext,
-                fechaDescarga:   res?.creationDate ?? Date(),
-                tamano:          Int64(res?.fileSize ?? 0),
-                materia:         materia
-            )
-            archivos.append(archivo)
-        }
-
-        archivos.sort { $0.fechaDescarga > $1.fechaDescarga }
-        guardarMetadata()
     }
 
 
