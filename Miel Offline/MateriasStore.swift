@@ -102,6 +102,34 @@ struct CuentaView: View {
                     .padding(.vertical, 4)
                 }
 
+                // ─── Acerca de (About) ─────────────────────────────────
+                Section("Acerca de") {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Miel Offline")
+                            .font(.headline)
+                        
+                        Text("Desarrollado para facilitar el acceso a los materiales de estudio de la **Universidad Nacional de La Matanza (UNLaM)**, permitiendo a los alumnos descargar clases y apuntes para verlos sin conexión a internet.")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                        
+                        HStack {
+                            Image(systemName: "graduationcap.fill")
+                                .foregroundStyle(.yellow)
+                            Text("Hecho por y para estudiantes.")
+                                .font(.caption.weight(.medium))
+                        }
+                        .padding(.top, 4)
+                        
+                        Link(destination: URL(string: "https://github.com/kaakeee/Miel-Offline-iOS")!) {
+                            Label("Ver código fuente en GitHub", systemImage: "chevron.left.forwardslash.chevron.right")
+                                .font(.footnote.weight(.semibold))
+                        }
+                        .padding(.top, 2)
+                    }
+                    .padding(.vertical, 8)
+                }
+
                 // ─── Logout ────────────────────────────────────────────
                 Section {
                     Button(role: .destructive) {
